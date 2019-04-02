@@ -524,15 +524,154 @@ A puzzle with four pieces:
     Gentle Introduction to Statistical Power and Power Analysis in Python}
 \end{frame}
 
+\begin{frame}{Are my groups different? summary}
+
+    \begin{itemize}
+        \item<+-> 2 groups, independent measures, normal distribution:
+            \textbf{Independent $t$-test}
+        \item<+-> 2 groups, dependent measures, normal distribution: \textbf{Paired
+            $t$-test} (for instance, conditions are within-subject)
+        \item<+-> 2 groups, non-parametric: \textbf{Mann-Whitney U} (and
+            \textbf{Wilcoxon signed-rank test} for paired samples)
+        \item<+-> Three or more groups: \textbf{ANOVA} (analysis of variance)
+    \end{itemize}
+
+    \pause
+
+    \begin{center}
+    Always report an \textbf{effect size} (for instance, \textbf{Cohen's $d$})
+
+    \pause
+
+        Keep a close eye on your data distributions (\textbf{plot them})
+    \end{center}
+
+
+\end{frame}
+
 \section{Does one variable explain the difference?}
 
+\begin{frame}{Our dataset}
+
+    \centering
+
+    \pgfplotstabletypeset[assign column name/.style={/pgfplots/table/column name={\textbf{####1}}},
+                          col sep=comma, 
+                          string type]{code/dataset1.csv}
+\end{frame}
+
+\begin{frame}{Association}
+
+    \Large
+    \centering
+    \bf
+
+    What is the degree of \emph{association} between two variables?
+
+    $\rightarrow$ main tool: correlation
+
+\end{frame}
+
+\begin{frame}{Pearson correlation}
+
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/dataset1-corr-heartrate.pdf}
+
+            \begin{center}
+                \tiny
+                \begin{tabular}{ll}
+                    \toprule
+                    Pearson's correlation & \\
+                    $\rho$      &  0.98  \\
+                    $p$   &   $< 0.001$\\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \onslide<2->{
+            \includegraphics[width=\columnwidth]{code/dataset1-corr-age.pdf}
+
+            \begin{center}
+                \tiny
+                \begin{tabular}{ll}
+                    \toprule
+                    Pearson's correlation & \\
+                    $\rho$ & -0.022     \\
+                    $p$   & 0.92  \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+        }
+
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}{Interpretation of $\rho$}
+    \begin{center}
+        \includegraphics<1>[width=\linewidth]{correlation}
+        \includegraphics<2>[width=\linewidth]{correlation-slope}
+        \includegraphics<3>[width=\linewidth]{correlation-nonlinear}
+
+        \only<1>{$\rho$ reflects the degree of linearity and direction}
+        \only<2>{$\rho$ does not reflect the slope of the regression line}
+        \only<3>{$\rho$ does not capture non-linear interactions}
+    \end{center}
+    \source{https://commons.wikimedia.org/wiki/File:Correlation_examples2.svg}{Wikipedia}
+\end{frame}
+
+\begin{frame}{Other measures of association}
+
+    \begin{itemize}
+        \item Non-parametric ordinal data: \textbf{Spearman rank correlation}
+        \item Association between categorical data (for instance, relationship
+            between 'gender' and 'preferred style of cuisine'):
+            \textbf{Pearson's Chi-Square $\chi^2$}
+    \end{itemize}
+
+\end{frame}
+
 \begin{frame}{Correlation is not causation}
-\end{frame}
 
-\begin{frame}{Effect size}
-    Quantify the degree of association between two related variables.
-\end{frame}
+    \only<1>{
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{corr-causation}
+    \end{center}
+}
 
+    \only<2>{
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{causation_xkcd_2}
+    \end{center}
+    \source{https://xkcd.com/925/}{XKCD}
+}
+
+
+    \only<3>{
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{causation_xkcd}
+    \end{center}
+    \source{https://xkcd.com/552/}{XKCD}
+}
+
+    \only<4>{
+        \centering
+        \Large
+        Be careful when writing something like:
+        
+            \includegraphics[width=0.5\linewidth]{code/dataset1-corr-score-heartrate.pdf}
+
+        \emph{``the significant positive correlation between
+        the heart rate and the score shows that you need to have a fast heart to
+        win''}
+    }
+
+\end{frame}
 
 \begin{frame}{To conclude: Anscombe's quartet}
     \only<1>{
@@ -569,7 +708,7 @@ Coefficient of determination of the linear regression & 0.67              \\ \bo
 }
     \only<3>{
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{anscombe_quartet}
+        \includegraphics[width=0.9\linewidth]{code/anscombe.pdf}
     \end{center}
 }
 \end{frame}
