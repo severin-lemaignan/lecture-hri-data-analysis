@@ -40,11 +40,30 @@ ax.get_figure().savefig("fig4.pdf")
 ax.clear()
 
 
+dataset = pd.read_csv("dataset1.csv")
+
+sns.barplot(x="condition", y="score", data=dataset, capsize=.1, ci="sd")
+sns.swarmplot(x="condition", y="score", data=dataset, color="0", alpha=.5, size=20)
+ax.get_figure().savefig("dataset1.pdf")
+
+ax.clear()
+
 dataset = pd.read_csv("dataset2.csv")
 
 sns.barplot(x="condition", y="score", data=dataset, capsize=.1, ci="sd")
 sns.swarmplot(x="condition", y="score", data=dataset, color="0", alpha=.5, size=20)
-ax.get_figure().savefig("dataset2-cdts.pdf")
+ax.get_figure().savefig("dataset2.pdf")
+
+ax.clear()
+
+
+dataset = pd.read_csv("dataset3.csv")
+
+sns.barplot(x="condition", y="score", data=dataset, capsize=.1, ci="sd")
+sns.swarmplot(x="condition", y="score", data=dataset, color="0", alpha=.5, size=20)
+ax.get_figure().savefig("dataset3.pdf")
+
+ax.clear()
 
 
 #plt.show()

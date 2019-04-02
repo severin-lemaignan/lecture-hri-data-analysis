@@ -32,4 +32,11 @@ sns.distplot(dataset[dataset["condition"]=="control"]["score"], bins=10)
 sns.distplot(dataset[dataset["condition"]=="cdt1"]["score"], bins=10)
 plt.savefig("distributions2.pdf")
 
+ax.clear()
+
+dataset = pd.read_csv("dataset3.csv")
+sns.distplot(dataset[dataset["condition"]=="control"]["score"], bins=10)
+sns.distplot(dataset[dataset["condition"]=="cdt1"]["score"], bins=10)
+plt.savefig("distributions3.pdf")
+
 

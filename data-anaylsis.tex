@@ -105,9 +105,7 @@
 
     \centering
 
-    \pgfplotstabletypeset[assign column name/.style={
-                            /pgfplots/table/column name={\textbf{#1}}
-                          },
+    \pgfplotstabletypeset[assign column name/.style={/pgfplots/table/column name={\textbf{####1}}},
                           col sep=comma, 
                           string type]{code/dataset1.csv}
 \end{frame}
@@ -188,7 +186,355 @@
 
 \imageframe[scale=0.8, caption={Show the underlying data!}]{code/fig4.pdf}
 
-\begin{frame}{Anscombe's quartet}
+\begin{frame}{Two additional datasets}
+
+    \begin{columns}
+        \begin{column}{0.45\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/dataset2.pdf}
+
+            \includegraphics[width=\columnwidth]{code/distributions2.pdf}
+        \end{column}
+        \begin{column}{0.45\linewidth}
+            \onslide<2>{
+            \includegraphics[width=\columnwidth]{code/dataset3.pdf}
+
+            \includegraphics[width=\columnwidth]{code/distributions3.pdf}
+        }
+
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{How big is the difference?}
+
+
+    \begin{columns}
+        \begin{column}{0.33\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/dataset2.pdf}
+
+            \begin{center}
+                \tiny
+                \begin{tabular}{lrrrrrrrr}
+                    \toprule
+                    {} &  mean &         std\\ \midrule
+                    cdt1      &   516.5 & 85.3 \\
+                    control   &   451.5 & 127.1\\ \midrule
+                    $\mu_1 - \mu_2$ & 69.2 & \only<5->{\\
+                    $\frac{\mu_1 - \mu_2}{\sigma}$ & 0.62 &} \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+
+        \end{column}
+        \begin{column}{0.33\linewidth}
+            \onslide<2->{
+                \includegraphics[width=\columnwidth]{code/dataset3.pdf}
+
+            \begin{center}
+                \tiny
+                \begin{tabular}{lrrrrrrrr}
+                    \toprule
+                    {} &  mean &         std\\ \midrule
+                    cdt1      &   687.3 & 81.5 \\
+                    control   &   451.5 & 127.1\\ \midrule
+                    $\mu_1 - \mu_2$ & 235.8 & \only<5->{\\
+                    $\frac{\mu_1 - \mu_2}{\sigma}$ & 2.21 &} \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+        }
+
+        \end{column}
+        \begin{column}{0.33\linewidth}
+            \onslide<3->{
+
+                \includegraphics[width=\columnwidth]{code/dataset1.pdf}
+
+            \begin{center}
+                \tiny
+                \begin{tabular}{lrrrrrrrr}
+                    \toprule
+                    {} &  mean &         std\\ \midrule
+                    cdt1      &   404.0 & 192.2 \\
+                    control   &   451.5 & 127.1\\ \midrule
+                    $\mu_1 - \mu_2$ & 47.5 & \only<5->{\\
+                    $\frac{\mu_1 - \mu_2}{\sigma}$ & 0.29 &} \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+        }
+
+        \end{column}
+    \end{columns}
+
+    \onslide<4>{\centering {\bf does not account for the variance in the dataset}}
+
+    \onslide<6>{
+        \centering A common measure of effect size: {\bf Cohen's $d = \frac{\mu_1 - \mu_2}{\sigma}$}
+
+        $\rightarrow$ \href{https://rpsychologist.com/d3/cohend/}{Interactive visualisation and interpretation of Cohen's $d$}
+    }
+
+\end{frame}
+
+\begin{frame}{Difference due to chance?}
+
+    A statistical hypothesis test makes an assumption about the outcome, called
+    the \textbf{null hypothesis}.
+
+    Our \emph{null hypothesis} is that there is no difference between the means
+    of our two populations.
+
+    \pause
+
+    $p$-value: probability of observing the result \emph{given that the null hypothesis is true}.
+
+    \begin{center}\bf $\Rightarrow$ Meaning of a low $p$-value? \end{center}
+
+    \pause
+
+    To interpret $p$, you need to choose a \emph{significance level} $\alpha$.\\
+    For instance, 10\% (0.1), 5\% (0.05), 2\% (0.02)...
+
+    \begin{exampleblock}{$p=0.05$}
+        'There's only 5\% of chance of observing these distributions if my null
+        hypothesis is true (ie, no difference between my groups).'
+    \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{How to calculate $p$?}
+
+    \begin{itemize}
+        \item If parametric data, \textbf{Student's $t$-test}
+        \item<5-> If non-parametric data, \textbf{Mann-Whitney $U$-test}
+    \end{itemize}
+
+    \only<2>{
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/distributions2.pdf}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+
+        \begin{tabular}{@{}ll@{}}
+    \toprule
+    $t$ statistic & -1.51                 \\
+    $p$ & 0.155              \\ \bottomrule
+    \end{tabular}
+        \end{column}
+    \end{columns}
+
+    }
+
+    \only<3>{
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/distributions3.pdf}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+
+        \begin{tabular}{@{}ll@{}}
+    \toprule
+    $t$ statistic & -5.41                 \\
+    $p$ & $<0.001$              \\ \bottomrule
+    \end{tabular}
+        \end{column}
+    \end{columns}
+
+    }
+
+    \only<4>{
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/distributions.pdf}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+
+        \begin{tabular}{@{}ll@{}}
+    \toprule
+    $t$ statistic & 0.71                 \\
+    $p$ & 0.48              \\ \bottomrule
+    \end{tabular}
+
+        \end{column}
+    \end{columns}
+}
+
+    \only<6>{
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+
+            \includegraphics[width=\columnwidth]{code/distributions.pdf}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+
+        \begin{tabular}{@{}ll@{}}
+    \toprule
+    $U$ statistic & 46.0                 \\
+    $p$ & 0.07              \\ \bottomrule
+    \end{tabular}
+
+        \end{column}
+    \end{columns}
+
+    See \href{https://en.wikipedia.org/wiki/Mann-Whitney_U_test}{Wikipedia page} for examples and interpreation of $U$
+}
+
+
+\end{frame}
+
+\begin{frame}{Impact of $n$?}
+
+    \begin{center}\bf What is the impact of the sample size $n$ on $p$?\end{center}
+    \pause
+
+    The higher $n$, the more unlikely the difference is due to chance
+    \begin{center}{\Large $\nearrow n \Rightarrow \searrow p$}\end{center}
+
+    \pause
+    
+\end{frame}
+
+\begin{frame}{Be careful with "Statistically Significant"!}
+
+    \centering
+
+    \pgfplotstabletypeset[assign column name/.style={/pgfplots/table/column name={\textbf{####1}}},
+                          col sep=comma, 
+                          string type]{code/dataset4.csv}
+\end{frame}
+
+\begin{frame}{Be careful with "Statistically Significant"!}
+    \centering
+
+
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    $t$ statistic & 12.52                 \\
+     $p$ & $<0.001$              \\
+    Mean female & 76.64                 \\
+    Mean male & 76.54                 \\
+    \bottomrule
+    \end{tabular}
+
+
+    \vspace{2em}
+    \Large $M_{female} > M_{male}, p < 0.001$
+
+    \pause
+
+    Girls are more intelligent! We knew it!
+
+    \pause
+
+    \normalsize
+    ...wait... how big is our effect?
+
+    $M_{female} - M_{male} = 0.1$ on a scale of 100??
+
+    \pause
+
+    \begin{alertblock}{Cohen's $d$}
+    $d = \frac{\mu_1 - \mu_2}{\sigma} = 4.12$ $\Rightarrow$ high, because
+        $\sigma$ very low
+    \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Statistical power analysis}
+
+\begin{exampleblock}{Statistical power}
+    The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect.
+\end{exampleblock}
+
+or:
+
+\begin{exampleblock}{Statistical power}
+    The statistical power of the test is the probability that
+    the test correctly rejects a \emph{false} null hypothesis.
+\end{exampleblock}
+
+
+\end{frame}
+
+\begin{frame}{Statistical power analysis}
+
+
+\begin{exampleblock}{Types of errors}
+    \begin{itemize}
+        \item \textbf{Type I error}: Reject the null hypothesis when there is in
+            fact no significant effect \emph{(too optimistic!)}
+        \item \textbf{Type II error}: Not reject the null hypothesis when there
+            is a significant effect \emph{(too pessimistic!)}
+    \end{itemize}
+\end{exampleblock}
+
+    \pause
+
+    \Large
+    \centering
+    \bf
+
+    Power = 1 - Type II Error
+
+\end{frame}
+
+\begin{frame}{Statistical power analysis}
+
+A puzzle with four pieces:
+
+    \begin{itemize}
+        \item \textbf{Effect size}
+        \item \textbf{Sample size}
+        \item \textbf{Significance} (chance of Type I error -- found inexistant
+            effect)
+        \item \textbf{Statistical power} (1 - chance of Type II error -- missed the effect)
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example: power analysis of Student's $t$-test}
+
+    \begin{itemize}
+        \item \textbf{Effect size}: Cohen's $d$ > 0.8
+        \item \textbf{Significance}: 5\%
+        \item \textbf{Statistical power}: 80\%
+        \item \textbf{Sample size?}
+
+    \end{itemize}
+
+    \pause
+
+    Using for instance Python's \python{statsmodels.stats.power.TTestIndPower},
+    we can compute that $n=25.5$ (per condition)
+
+    \pause
+
+    A good read on statistical power analysis:
+
+    \href{https://machinelearningmastery.com/statistical-power-and-power-analysis-in-python/}{A
+    Gentle Introduction to Statistical Power and Power Analysis in Python}
+\end{frame}
+
+\section{Does one variable explain the difference?}
+
+\begin{frame}{Correlation is not causation}
+\end{frame}
+
+\begin{frame}{Effect size}
+    Quantify the degree of association between two related variables.
+\end{frame}
+
+
+\begin{frame}{To conclude: Anscombe's quartet}
     \only<1>{
         \small
     \begin{tabular}{@{}llllllll@{}}
@@ -209,65 +555,23 @@
 \end{tabular}
 }
     \only<2>{
+        \begin{tabular}{@{}p{6cm}l@{}}
+\toprule
+\textbf{Property}                                     & \textbf{Value}    \\ \midrule
+Mean of x                                             & 9                 \\
+Sample variance of x                                  & 11                \\
+Mean of y                                             & 7.50              \\
+Sample variance of y                                  & 4.125             \\
+Correlation between x and y                           & 0.816             \\
+Linear regression line                                & y = 3.00 + 0.500x \\
+Coefficient of determination of the linear regression & 0.67              \\ \bottomrule
+\end{tabular}
+}
+    \only<3>{
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{Anscombe's_quartet}
+        \includegraphics[width=0.8\linewidth]{anscombe_quartet}
     \end{center}
 }
-\end{frame}
-
-
-\begin{frame}{Alternative dataset}
-
-    \begin{columns}
-        \begin{column}{0.5\linewidth}
-
-            \includegraphics[width=\columnwidth]{code/dataset2-cdts.pdf}
-        \end{column}
-        \begin{column}{0.5\linewidth}
-            \includegraphics[width=\columnwidth]{code/distributions2.pdf}
-
-        \end{column}
-    \end{columns}
-
-    \begin{center}
-        \begin{tabular}{lrrrrrrrr}
-            \toprule
-            {} &  mean &         std\\ \midrule
-            cdt1      &   516.5 & 85.3 \\
-            control   &   451.5 & 127.1\\
-            \bottomrule
-        \end{tabular}
-    \end{center}
-
-\end{frame}
-
-
-\begin{frame}{How big is the difference?}
-
-
-\end{frame}
-
-\begin{frame}{Difference due to chance?}
-
-    [impact of n on p]
-\end{frame}
-
-
-\begin{frame}{Be careful with "Statistically Significant"!}
-
-    [low p value, but low effect size]
-\end{frame}
-
-\begin{frame}{Statistical power analysis}
-\end{frame}
-
-\section{Does one variable explain the difference?}
-
-\begin{frame}{Correlation is not causation}
-\end{frame}
-
-\begin{frame}{Effect size}
-    Quantify the degree of association between two related variables.
 \end{frame}
 
 
