@@ -8,7 +8,7 @@ Lecture slides on data analysis for human robot interaction.
   clearly mention Séverin Lemaignan as the original author. If you
   modify/augment these slides, you *must* share the modifications under the same
   license)
-- [Link to the PDF slides](data-analysis.pdf)
+- [Link to the PDF slides](data-anaylsis.pdf)
 
 
 
