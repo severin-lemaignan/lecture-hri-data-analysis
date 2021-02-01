@@ -63,8 +63,8 @@
 
 \graphicspath{{figs/}}
 
-\title{Data Analysis for HRI}
-\subtitle{~}
+\title{Human-Robot Interaction}
+\subtitle{Data Analysis for HRI}
 \date{}
 \author{Séverin Lemaignan}
 \institute{{\bf Bristol Robotics Lab}\\University of the West of England}
@@ -75,7 +75,10 @@
 
 \licenseframe{github.com/severin-lemaignan/lecture-hri-data-analysis}
 
+{
+\setbeamercolor{background canvas}{bg=uweBlue}
 \maketitle
+}
 
 \miniframeson
 
@@ -468,28 +471,41 @@ or:
 \begin{frame}{Statistical power analysis}
 
 
-\begin{exampleblock}{Types of errors}
-    \begin{itemize}
-        \item \textbf{Type I error}: Reject the null hypothesis when there is in
-            fact no significant effect \emph{(too optimistic!)}
-        \item \textbf{Type II error}: Not reject the null hypothesis when there
-            is a significant effect \emph{(too pessimistic!)}
-    \end{itemize}
-\end{exampleblock}
-
-    \pause
-
-    \begin{exampleblock}{Statistical power}
-        The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect.
+    \begin{exampleblock}{Types of errors}
+        \begin{itemize}
+            \item \textbf{Type I error}: Reject the null hypothesis when there is in
+                fact no significant effect \emph{(too optimistic!)}
+            \item \textbf{Type II error}: Not reject the null hypothesis when there
+                is a significant effect \emph{(too pessimistic!)}
+        \end{itemize}
     \end{exampleblock}
 
-    \pause
+    \only<2>{
+        \begin{exampleblock}{The boy who cried wolf}
+            \begin{itemize}
+                \item \textbf{Type I error}:\\
+                    \emph{``there's a wolf!''} (too optimistic: there's no wolf!)
+                \item \textbf{Type II error}: \\
+                    \emph{...the villager don't respond when there really is a
+                    wolf}\\
+                    (too pessimistic: there is indeed a wolf!)
+            \end{itemize}
+        \end{exampleblock}
+    }
+    \only<3->{
 
-    \Large
-    \centering
-    \bf
+        \begin{exampleblock}{Statistical power}
+            The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect.
+        \end{exampleblock}
+    }
 
-    Power = 1 - Type II Error
+    \only<4>{
+        \Large
+        \centering
+        \bf
+
+        Power = 1 - Type II Error
+    }
 
 \end{frame}
 
@@ -652,7 +668,7 @@ A puzzle with four pieces:
 
     \only<2>{
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{causation_xkcd_2}
+        \includegraphics[width=0.9\linewidth]{causation_xkcd_2}
     \end{center}
     \source{https://xkcd.com/925/}{XKCD}
 }
@@ -660,7 +676,7 @@ A puzzle with four pieces:
 
     \only<3>{
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{causation_xkcd}
+        \includegraphics[width=0.9\linewidth]{causation_xkcd}
     \end{center}
     \source{https://xkcd.com/552/}{XKCD}
 }
